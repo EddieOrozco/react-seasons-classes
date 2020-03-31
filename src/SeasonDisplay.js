@@ -1,3 +1,5 @@
+import "./SeasonDisplay.css";
+
 import React from "react";
 
 const seasonConfig = {
@@ -11,6 +13,7 @@ const seasonConfig = {
   }
 };
 
+// Function returns summer or winter
 const getSeason = (lat, month) => {
   if (month > 2 && month < 9) {
     return lat > 0 ? "summer" : "winter";
@@ -20,13 +23,20 @@ const getSeason = (lat, month) => {
 };
 
 const SeasonDisplay = props => {
+  console.log(props.lat); // test to see if lat is being passes correctly
+  // getSeason holds the results of the Function Logic
+  // season is the VARIABLE shrinking the getSeason
   const season = getSeason(props.lat, new Date().getMonth());
-  const { text, iconName } = seasonConfig[season];
+  console.log(season); // test to see if season is being passes correctly
+
+  // References the seasonConfig at top of Component
+  const { text, iconName } = seasonConfig[season]; // RETURNS the {text,iconNAme}
+
   return (
-    <div>
-      <i className={`${iconName} icon`} />
+    <div className={`season-display ${season}`}>
+      <i className={`icon-left massive ${iconName} icon`} />
       <h1>{text}</h1>
-      <i className={`${iconName} icon`} />
+      <i className={`icon-right massive ${iconName} icon`} />
     </div>
   );
 };
